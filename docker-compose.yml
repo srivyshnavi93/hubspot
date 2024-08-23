@@ -1,0 +1,17 @@
+version: "3.6"
+volumes:
+  shared-workspace:
+    name: "shared-workspace"
+    driver: local
+services:
+  java-container:
+    image: hubspot_application
+    container_name: hubspot_application_container
+    networks:
+      - odp_intra_network
+    volumes:
+      - /Users/vyshnavi/Documents/GitHub/hubspot-application/:/hubspot/hubspot-application
+      - shared-workspace:/opt/spark/shared-workspace
+networks:
+  odp_intra_network:
+    external: true
