@@ -5,8 +5,14 @@ import com.hubspot.api.domain.Partner;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.*;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Collections;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -83,7 +89,7 @@ public class InvitationHelper {
      * 
      * @param countryToDateMap
      * @param countriesToIndexMap
-     * @return retuns list of invitations
+     * @return returns list of invitations
      */
     public static List<Invitation> createInvitations(Map<String, String> countryToDateMap,
             Map<String, List<Partner>> countriesToIndexMap) {
