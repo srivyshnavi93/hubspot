@@ -17,6 +17,17 @@ public class InvitationHelper {
 
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
 
+    /**
+     * Generate country to available dates map as following: 1. Create unique country & their partners map from list of
+     * partners. 2. For each unique country, loop and do the following: 2.a for each partner which matches the country,
+     * create list of dates which has diff b/w end and start date is exactly one day. 3. from list of above dates, count
+     * the duplicates and get the maximum duplicate counts 4. for that maximum count dates, find out the lowest one and
+     * add to that country. 5. This added country to date map for each country.
+     *
+     * @param partners
+     * @return returns list of invitation.
+     *
+     */
     public static List<Invitation> planInvitations(List<Partner> partners) {
         Map<String, List<Partner>> partnersByCountry = partners.stream()
                 .collect(Collectors.groupingBy(Partner::getCountry));
@@ -33,6 +44,12 @@ public class InvitationHelper {
         return createInvitations(countryEvents, partnersByCountry);
     }
 
+    /**
+     * Create invitation request post object.
+     * 
+     * @param partnersList
+     * @return returns the best date to meet for that country.
+     */
     public static String findBestEventDates(List<Partner> partnersList) {
         List<String> datesList = new ArrayList<>();
 
@@ -61,6 +78,13 @@ public class InvitationHelper {
         return similarCountDatesList.get(0);
     }
 
+    /**
+     * Create invitation request post object.
+     * 
+     * @param countryToDateMap
+     * @param countriesToIndexMap
+     * @return retuns list of invitations
+     */
     public static List<Invitation> createInvitations(Map<String, String> countryToDateMap,
             Map<String, List<Partner>> countriesToIndexMap) {
 
